@@ -1,7 +1,7 @@
 import { Checkbox } from "@/components/ui/checkbox";
 import PropTypes from "prop-types";
 
-const Task = ({ title }) => {
+const Todo = ({ title }) => {
     return (
         <div className="shadow-custom p-6 rounded-lg border">
             <div className="flex gap-4 items-center">
@@ -12,8 +12,8 @@ const Task = ({ title }) => {
     );
 };
 
-Task.propTypes = {
+Todo.propTypes = {
     title: PropTypes.string,
 };
 
-export default Task;
+export default Todo;

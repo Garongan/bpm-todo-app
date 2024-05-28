@@ -57,7 +57,12 @@ const NewGroupTask = () => {
 
     return (
         <div className={`flex flex-col gap-10`}>
-            <Button variant="outline" size="icon" className="bg-zinc-100/75 border-0 shadow-custom" onClick={() => navigate(-1)}>
+            <Button
+                variant="outline"
+                size="icon"
+                className="bg-zinc-100/75 border-0 shadow-custom"
+                onClick={() => navigate(-1)}
+            >
                 <ChevronLeft className="h-4 md:h-10 w-4 md:w-10" />
             </Button>
             <h2 className="flex gap-2 text-[150%] font-medium">Create New Group</h2>
@@ -65,13 +70,13 @@ const NewGroupTask = () => {
                 <Input
                     type="text"
                     placeholder="Group Title"
-                    className="shadow-custom"
+                    className="shadow-custom text-[120%] p-6"
                     value={groupTitle}
                     onChange={(e) => setGroupTitle(e.target.value)}
                 />
                 <Textarea
                     placeholder="Group Description"
-                    className="shadow-custom"
+                    className="shadow-custom text-[120%] p-6"
                     value={groupDescription}
                     onChange={(e) => setGroupDescription(e.target.value)}
                 />
@@ -86,7 +91,12 @@ const NewGroupTask = () => {
                         </li>
                     ))}
                 </ul>
-                <Button variant="ghost" className="shadow-custom border" onClick={handleSubmit} disabled={loading}>
+                <Button
+                    variant="ghost"
+                    className="shadow-custom border text-[120%] p-6"
+                    onClick={handleSubmit}
+                    disabled={loading}
+                >
                     {loading ? <Loader /> : "Submit"}
                 </Button>
             </div>

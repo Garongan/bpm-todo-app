@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 
-const TaskLayout = () => {
+const TodoLayout = () => {
     return <Outlet />;
 };
 
-export default TaskLayout;
+export default TodoLayout;

@@ -2,7 +2,7 @@ import { ChevronLeft } from "lucide-react";
 import { Link, useParams } from "react-router-dom";
 import { Button } from "../../components/ui/button";
 import NewTaskButton from "../../components/ui/new-task-button";
-import TaskList from "../Task/TaskList";
+import TodoList from "../Todo/TodoList.jsx";
 import CustomSelect from "@/components/ui/custom-select";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -20,7 +20,7 @@ const GroupTaskDetail = () => {
     });
 
     useEffect(() => {
-        const response = groupTasks.find((item) => item.id == id);
+        const response = groupTasks.find((item) => item.id === parseInt(id));
         setData(response);
     }, [id, groupTasks]);
 
@@ -39,12 +39,12 @@ const GroupTaskDetail = () => {
             <div className="flex flex-col gap-4">
                 <h2 className="flex gap-2 text-[200%] font-semibold">{data.title}</h2>
                 <p className="text-[120%] text-zinc-500">{data.description}</p>
-                <p className="text-[120%] text-zinc-500">{data.category}</p>
+                <p className="text-[120%] p-2 bg-zinc-300 rounded-lg w-fit">{data.category}</p>
             </div>
-            <TaskList />
+            <TodoList todos={data.todos} />
             <div className="pb-5 fixed container bottom-0">
                 <div className="flex justify-end pr-8">
-                    <Link to="/task/new">
+                    <Link to={`/task/new/${id}`}>
                         <NewTaskButton />
                     </Link>
                 </div>

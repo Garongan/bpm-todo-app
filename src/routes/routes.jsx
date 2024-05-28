@@ -3,40 +3,40 @@ import Error from "@/pages/Error/Error";
 import GroupTaskDetail from "@/pages/GroupTask/GroupTaskDetail";
 import GroupTaskLayout from "@/pages/GroupTask/GroupTaskLayout";
 import NewGroupTask from "@/pages/GroupTask/NewGroupTask";
-import NewTask from "@/pages/Task/NewTask";
-import TaskLayout from "@/pages/Task/TaskLayout";
-import { createBrowserRouter } from "react-router-dom";
+import TodoLayout from "@/pages/Todo/TodoLayout.jsx";
+import {createBrowserRouter} from "react-router-dom";
+import NewTodo from "@/pages/Todo/NewTodos.jsx";
 
 const Routes = createBrowserRouter([
     {
         path: "*",
-        element: <Error />,
+        element: <Error/>,
     },
     {
         path: "/",
-        element: <App />,
+        element: <App/>,
     },
     {
         path: "task",
-        element: <TaskLayout />,
+        element: <TodoLayout/>,
         children: [
             {
-                path: "new",
-                element: <NewTask />,
+                path: "new/:groupId",
+                element: <NewTodo/>,
             },
         ],
     },
     {
         path: "group",
-        element: <GroupTaskLayout />,
+        element: <GroupTaskLayout/>,
         children: [
             {
                 path: "detail/:id",
-                element: <GroupTaskDetail />,
+                element: <GroupTaskDetail/>,
             },
             {
                 path: "new",
-                element: <NewGroupTask />,
+                element: <NewGroupTask/>,
             },
         ],
     },
