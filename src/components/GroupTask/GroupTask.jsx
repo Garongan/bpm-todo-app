@@ -5,7 +5,7 @@ import { useState } from "react";
 
 import PropTypes from "prop-types";
 
-const Task = ({ color }) => {
+const GroupTask = ({ color }) => {
     const [value, setValue] = useState(20);
 
     return (
@@ -17,18 +17,18 @@ const Task = ({ color }) => {
                 </CardHeader>
                 <CardFooter>
                     <CircleCheck className="h-5 w-5 mr-2" />
-                    <p>12 tasks</p>
+                    <p className="text-[100%]">12 tasks</p>
                 </CardFooter>
             </div>
             <div className="p-6">
-                <Knob value={value} valueColor={color} strokeWidth={5} readOnly />
+                <Knob value={value} valueColor={color} strokeWidth={10} readOnly />
             </div>
         </Card>
     );
 };
 
-Task.propTypes = {
+GroupTask.propTypes = {
     color: PropTypes.string.isRequired,
 };
 
-export default Task;
+export default GroupTask;
