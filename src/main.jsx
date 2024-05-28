@@ -5,7 +5,7 @@ import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
-        <div className="container mx-auto py-5">
+        <div className="container py-5 2xl:text-xl xl:text-lg lg:text-base md:text-sm text-xs">
             <App />
         </div>
     </React.StrictMode>

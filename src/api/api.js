@@ -1,11 +1,10 @@
 import axios from "axios";
+const baseUrlFromOpenWeather = import.meta.env.VITE_OPENWEATHER_BASE_URL;
+const apiKeyFromOpenWeather = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
-const baseUrl = import.meta.env.VITE_BASE_URL;
-export const getTime = async () => {
-    try {
-        const response = await axios.get(`${baseUrl}/ip`);
-        return response.data;
-    } catch (error) {
-        return error;
-    }
+export const CurrentWeatherByGeo = async (lat, lon) => {
+    const CurrentWeather = await axios.get(
+      `${baseUrlFromOpenWeather}?lat=${lat}&lon=${lon}&lang=id&appid=${apiKeyFromOpenWeather}&units=metric`
+    );
+    return CurrentWeather;
 };
