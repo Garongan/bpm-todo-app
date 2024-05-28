@@ -37,12 +37,12 @@ function App() {
         );
     }, [toast]);
 
-    // const { data, isSuccess } = useQuery({
-    //     queryKey: ["weather", lat, lon],
-    //     queryFn: () => CurrentWeatherByGeo(lat, lon),
-    //     enabled: !!lat && !!lon,
-    //     staleTime: keepPreviousData,
-    // });
+    const { data, isSuccess } = useQuery({
+        queryKey: ["weather", lat, lon],
+        queryFn: () => CurrentWeatherByGeo(lat, lon),
+        enabled: !!lat && !!lon,
+        staleTime: keepPreviousData,
+    });
 
     return (
         <div className="flex flex-col gap-10">
@@ -61,11 +61,11 @@ function App() {
                     <Search className="h-4 md:h-10 w-4 md:w-10" />
                 </Button>
             </div>
-            {/* {!isSuccess ? (
+            {!isSuccess ? (
                 <Loader />
             ) : (
                 <WeatherInfo iconCode={data.data.weather[0].icon} city={data.data.name} temp={data.data.main.temp} />
-            )} */}
+            )}
             <Status />
             <GroupTaskList />
             <div className="pb-5 fixed container bottom-0">
