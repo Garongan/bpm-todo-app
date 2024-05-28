@@ -1,11 +1,29 @@
 import { ChevronLeft } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Button } from "../../components/ui/button";
 import NewTaskButton from "../../components/ui/new-task-button";
 import TaskList from "../Task/TaskList";
 import CustomSelect from "@/components/ui/custom-select";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const GroupTaskDetail = () => {
+    const { id } = useParams();
+    const { groupTasks } = useSelector((state) => state.groupTask);
+    const [data, setData] = useState({
+        category: "",
+        description: "",
+        id: 0,
+        status: "",
+        title: "",
+        todos: [],
+    });
+
+    useEffect(() => {
+        const response = groupTasks.find((item) => item.id == id);
+        setData(response);
+    }, [id, groupTasks]);
+
     return (
         <div className="flex flex-col gap-10">
             <div className="flex items-center justify-between">
@@ -15,12 +33,13 @@ const GroupTaskDetail = () => {
                     </Button>
                 </Link>
                 <div className="w-auto">
-                    <CustomSelect />
+                    <CustomSelect status={data.status} />
                 </div>
             </div>
             <div className="flex flex-col gap-4">
-                <h2 className="flex gap-2 text-[200%] font-semibold">Title</h2>
-                <p className="text-[120%] text-zinc-500">Description</p>
+                <h2 className="flex gap-2 text-[200%] font-semibold">{data.title}</h2>
+                <p className="text-[120%] text-zinc-500">{data.description}</p>
+                <p className="text-[120%] text-zinc-500">{data.category}</p>
             </div>
             <TaskList />
             <div className="pb-5 fixed container bottom-0">

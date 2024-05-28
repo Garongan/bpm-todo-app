@@ -5,22 +5,25 @@ import { useState } from "react";
 
 import PropTypes from "prop-types";
 
-const GroupTask = ({ color }) => {
-    const [value, setValue] = useState(20);
+const GroupTask = ({ color, title, description, category, todos }) => {
+    const [value, setValue] = useState(0);
 
+    if (todos?.length > 0) {
+        setValue((todos.filter((todo) => todo.status === "completed").length / todos.length) * 100);
+    }
     return (
         <Card className="mt-5 flex justify-between items-center">
             <div>
                 <CardHeader>
-                    <CardTitle>Card Title</CardTitle>
-                    <CardDescription>Card Description</CardDescription>
+                    <CardTitle>{title}</CardTitle>
+                    <CardDescription>{description}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <p className="text-[100%] bg-zinc-300 p-1 rounded-lg justify-center flex">Category</p>
+                    <p className="text-[100%] bg-zinc-300 p-1 rounded-lg justify-center flex">{category}</p>
                 </CardContent>
                 <CardFooter>
                     <CircleCheck className="h-5 w-5 mr-2" />
-                    <p className="text-[100%]">12 tasks</p>
+                    <p className="text-[100%]">{todos.length} tasks</p>
                 </CardFooter>
             </div>
             <div className="p-6">
@@ -32,6 +35,10 @@ const GroupTask = ({ color }) => {
 
 GroupTask.propTypes = {
     color: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+    todos: PropTypes.array.isRequired,
 };
 
 export default GroupTask;

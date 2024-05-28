@@ -17,7 +17,7 @@ const Routes = createBrowserRouter([
         element: <App />,
     },
     {
-        path: "/task",
+        path: "task",
         element: <TaskLayout />,
         children: [
             {
@@ -27,11 +27,11 @@ const Routes = createBrowserRouter([
         ],
     },
     {
-        path: "/group",
+        path: "group",
         element: <GroupTaskLayout />,
         children: [
             {
-                index: true,
+                path: "detail/:id",
                 element: <GroupTaskDetail />,
             },
             {

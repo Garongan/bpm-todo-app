@@ -1,5 +1,6 @@
 import { ChevronDown } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 
 const options = [
     { value: "on-going", label: "On Going", className: "bg-blue-400" },
@@ -8,7 +9,7 @@ const options = [
     { value: "canceled", label: "Canceled", className: "bg-red-400" },
 ];
 
-const CustomSelect = () => {
+const CustomSelect = ({ status }) => {
     const [selectedOption, setSelectedOption] = useState(options[0]);
 
     const handleChange = (event) => {
@@ -16,12 +17,16 @@ const CustomSelect = () => {
         setSelectedOption(selected);
     };
 
+    useEffect(() => {
+        setSelectedOption(options.find((item) => item.value === status))
+    }, [status])
+
     return (
         <div className="relative md:min-w-48 min-w-32">
             <select
-                value={selectedOption.value}
+                value={selectedOption?.value}
                 onChange={handleChange}
-                className={`h-10 md:h-20 rounded-xl appearance-none px-6 w-full leading-tight focus:outline-none focus:border-gray-500 ${selectedOption.className}`}
+                className={`h-10 md:h-20 rounded-xl appearance-none px-6 w-full leading-tight focus:outline-none focus:border-gray-500 ${selectedOption?.className}`}
             >
                 {options.map((option) => (
                     <option key={option.value} value={option.value} className={option.className}>
@@ -34,6 +39,10 @@ const CustomSelect = () => {
             </div>
         </div>
     );
+};
+
+CustomSelect.propTypes = {
+    status: PropTypes.string,
 };
 
 export default CustomSelect;
