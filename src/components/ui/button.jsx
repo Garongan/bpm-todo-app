@@ -23,7 +23,7 @@ const buttonVariants = cva(
         default: "h-10 px-4 py-2",
         sm: "h-9 rounded-md px-3",
         lg: "h-11 rounded-md px-8",
-        icon: "h-10 md:h-20 w-10 md:w-20 rounded-xl",
+        icon: "h-10 md:h-16 w-10 md:w-16 rounded-xl",
       },
     },
     defaultVariants: {
