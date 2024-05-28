@@ -1,4 +1,4 @@
-import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { CircleCheck } from "lucide-react";
 import { Knob } from "primereact/knob";
 import { useState } from "react";
@@ -15,6 +15,9 @@ const GroupTask = ({ color }) => {
                     <CardTitle>Card Title</CardTitle>
                     <CardDescription>Card Description</CardDescription>
                 </CardHeader>
+                <CardContent>
+                    <p className="text-[100%] bg-zinc-300 p-1 rounded-lg justify-center flex">Category</p>
+                </CardContent>
                 <CardFooter>
                     <CircleCheck className="h-5 w-5 mr-2" />
                     <p className="text-[100%]">12 tasks</p>

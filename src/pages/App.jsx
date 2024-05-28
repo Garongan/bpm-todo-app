@@ -7,10 +7,10 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { CurrentWeatherByGeo } from "../api/api";
 import { Button } from "../components/ui/button";
-import Category from "../components/ui/category";
+import Status from "../components/ui/status";
 import Loader from "../components/ui/loader";
 import WeatherInfo from "../components/ui/weather-info";
-import GroupTaskList from "@/components/GroupTask/GroupTaskList";
+import GroupTaskList from "@/pages/GroupTask/GroupTaskList";
 import NewTaskButton from "../components/ui/new-task-button";
 
 function App() {
@@ -25,14 +25,14 @@ function App() {
                 setLat(crd.latitude);
                 setLon(crd.longitude);
             },
-            // () => {
-            //     toast({
-            //         variant: "destructive",
-            //         title: "Uh oh! Something went wrong.",
-            //         description: "Please enable the location service",
-            //         action: <ToastAction altText="Try again">Try again</ToastAction>,
-            //     });
-            // },
+            () => {
+                toast({
+                    variant: "destructive",
+                    title: "Uh oh! Something went wrong.",
+                    description: "Please enable the location service",
+                    action: <ToastAction altText="Try again">Try again</ToastAction>,
+                });
+            },
             { enableHighAccuracy: true, maximumAge: 0 }
         );
     }, [toast]);
@@ -45,7 +45,7 @@ function App() {
     // });
 
     return (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-10">
             <div className="flex justify-between">
                 <div className="flex gap-2">
                     <Avatar>
@@ -66,7 +66,7 @@ function App() {
             ) : (
                 <WeatherInfo iconCode={data.data.weather[0].icon} city={data.data.name} temp={data.data.main.temp} />
             )} */}
-            <Category />
+            <Status />
             <GroupTaskList />
             <div className="pb-5 fixed container bottom-0">
                 <div className="flex justify-end pr-8">

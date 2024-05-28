@@ -1,13 +1,17 @@
-import GroupTaskDetail from "@/components/GroupTask/GroupTaskDetail";
-import GroupTaskLayout from "@/components/GroupTask/GroupTaskLayout";
-import NewGroupTask from "@/components/GroupTask/NewGroupTask";
-import NewTask from "@/components/Task/NewTask";
-import TaskDetail from "@/components/Task/TaskDetail";
-import TaskLayout from "@/components/Task/TaskLayout";
 import App from "@/pages/App";
+import Error from "@/pages/Error/Error";
+import GroupTaskDetail from "@/pages/GroupTask/GroupTaskDetail";
+import GroupTaskLayout from "@/pages/GroupTask/GroupTaskLayout";
+import NewGroupTask from "@/pages/GroupTask/NewGroupTask";
+import NewTask from "@/pages/Task/NewTask";
+import TaskLayout from "@/pages/Task/TaskLayout";
 import { createBrowserRouter } from "react-router-dom";
 
 const Routes = createBrowserRouter([
+    {
+        path: "*",
+        element: <Error />,
+    },
     {
         path: "/",
         element: <App />,
@@ -16,10 +20,6 @@ const Routes = createBrowserRouter([
         path: "/task",
         element: <TaskLayout />,
         children: [
-            {
-                index: true,
-                element: <TaskDetail />,
-            },
             {
                 path: "new",
                 element: <NewTask />,
