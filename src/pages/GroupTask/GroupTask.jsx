@@ -28,7 +28,7 @@ const GroupTask = ({ color, title, description, category, todos }) => {
                 </CardContent>
                 <CardFooter>
                     <CircleCheck className="h-5 w-5 mr-2" />
-                    <p className="text-[100%]">{todos.length} tasks</p>
+                    <p className="text-[100%]">{todos?.length} tasks</p>
                 </CardFooter>
             </div>
             <div className="p-6">

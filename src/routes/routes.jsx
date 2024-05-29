@@ -2,7 +2,7 @@ import App from "@/pages/App";
 import Error from "@/pages/Error/Error";
 import GroupTaskDetail from "@/pages/GroupTask/GroupTaskDetail";
 import GroupTaskLayout from "@/pages/GroupTask/GroupTaskLayout";
-import NewGroupTask from "@/pages/GroupTask/NewGroupTask";
+import GroupTaskForm from "@/pages/GroupTask/GroupTaskForm.jsx";
 import TodoLayout from "@/pages/Todo/TodoLayout.jsx";
 import {createBrowserRouter} from "react-router-dom";
 import NewTodo from "@/pages/Todo/NewTodos.jsx";
@@ -36,8 +36,12 @@ const Routes = createBrowserRouter([
             },
             {
                 path: "new",
-                element: <NewGroupTask/>,
+                element: <GroupTaskForm/>,
             },
+            {
+                path: "update/:id",
+                element: <GroupTaskForm/>
+            }
         ],
     },
 ]);

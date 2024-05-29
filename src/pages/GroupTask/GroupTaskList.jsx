@@ -23,7 +23,7 @@ const GroupTaskList = () => {
                                 todos={task.todos}
                             />
                         </Link>
-                        <CustomActions/>
+                        <CustomActions id={task.id}/>
                     </div>
                 ))
             ) : (

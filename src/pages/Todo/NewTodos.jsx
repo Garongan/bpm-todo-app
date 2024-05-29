@@ -38,7 +38,7 @@ const NewTodo = () => {
             >
                 <ChevronLeft className="h-4 md:h-10 w-4 md:w-10" />
             </Button>
-            <h2 className="flex gap-2 text-[150%] font-medium">Create New Task</h2>
+            <h2 className="flex gap-2 text-[150%] font-medium">Create New Todo</h2>
             <div className="flex flex-col gap-4">
                 <div className="flex gap-2">
                     <Input
@@ -49,7 +49,7 @@ const NewTodo = () => {
                         onChange={(e) => setTodo(e.target.value)}
                     />
                 </div>
-                <Button variant="ghost" className="shadow-custom border text-[120%] p-6" onClick={handleSubmit}>
+                <Button className="shadow-custom border-2 text-[120%] p-6" onClick={handleSubmit}>
                     {loading ? <Loader /> : "Submit"}
                 </Button>
             </div>
