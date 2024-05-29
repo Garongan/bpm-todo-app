@@ -49,12 +49,21 @@ const GroupTaskForm = () => {
 
     const handleSubmit = () => {
         if (id) {
-            setUpdateGroupTask({
-                ... updatedGroupTask,
+            const updatedTask = {
+                ...updatedGroupTask,
                 title: groupTitle,
-                description: groupDescription
+                description: groupDescription,
+                category: selectedOption
+            }
+
+            const payload = groupTasks.map(item => {
+                if (item.id === parseInt(id)) {
+                    return updatedTask;
+                } else {
+                    return item;
+                }
             });
-            dispatch(updateGroupTaskRequest(updatedGroupTask));
+            dispatch(updateGroupTaskRequest(payload));
         } else {
             const generatedId = new Date().getMilliseconds();
             const newGroupTask = {
@@ -76,12 +85,11 @@ const GroupTaskForm = () => {
     useEffect(() => {
         if (id) {
             const response = groupTasks.find((item) => item.id === parseInt(id));
-            console.log(response);
             setGroupTitle(response.title);
             setGroupDescription(response.description);
             setUpdateGroupTask(response);
         }
-    }, [ id, groupTasks ]);
+    }, [id, groupTasks]);
 
     return (
         <div className={ `flex flex-col gap-10` }>
