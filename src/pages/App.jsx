@@ -1,21 +1,22 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { ToastAction } from "@/components/ui/toast";
-import { useToast } from "@/components/ui/use-toast";
-import { keepPreviousData, useQuery } from "@tanstack/react-query";
-import { Search } from "lucide-react";
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { CurrentWeatherByGeo } from "../api/api";
-import { Button } from "../components/ui/button";
+import {Avatar, AvatarFallback, AvatarImage} from "@/components/ui/avatar";
+import {ToastAction} from "@/components/ui/toast";
+import {useToast} from "@/components/ui/use-toast";
+import {keepPreviousData, useQuery} from "@tanstack/react-query";
+import {Search} from "lucide-react";
+import {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
+import {CurrentWeatherByGeo} from "../api/api";
+import {Button} from "../components/ui/button";
 import Status from "../components/ui/status";
 import Loader from "../components/ui/loader";
 import WeatherInfo from "../components/ui/weather-info";
 import GroupTaskList from "@/pages/GroupTask/GroupTaskList";
 import NewTaskButton from "../components/ui/new-task-button";
+import CategoryFilter from "@/components/ui/category-filter.jsx";
 
 function App() {
-    const [lat, setLat] = useState("");
-    const [lon, setLon] = useState("");
+    const [ lat, setLat ] = useState("");
+    const [ lon, setLon ] = useState("");
     const { toast } = useToast();
 
     useEffect(() => {
@@ -30,18 +31,18 @@ function App() {
                     variant: "destructive",
                     title: "Uh oh! Something went wrong.",
                     description: "Please enable the location service",
-                    action: <ToastAction altText="Try again">Try again</ToastAction>,
+                    action: <ToastAction altText="Try again">Try again</ToastAction>
                 });
             },
             { enableHighAccuracy: true, maximumAge: 0 }
         );
-    }, [toast]);
+    }, [ toast ]);
 
     const { data, isSuccess } = useQuery({
-        queryKey: ["weather", lat, lon],
+        queryKey: [ "weather", lat, lon ],
         queryFn: () => CurrentWeatherByGeo(lat, lon),
         enabled: !!lat && !!lon,
-        staleTime: keepPreviousData,
+        staleTime: keepPreviousData
     });
 
     return (
@@ -49,7 +50,7 @@ function App() {
             <div className="flex justify-between">
                 <div className="flex gap-2">
                     <Avatar>
-                        <AvatarImage src="https://github.com/shadcn.png" />
+                        <AvatarImage src="https://github.com/shadcn.png"/>
                         <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
                     <div className="flex flex-col justify-center">
@@ -58,20 +59,24 @@ function App() {
                     </div>
                 </div>
                 <Button variant="ghost" size="icon" className="bg-zinc-200/75 border-0 shadow-custom">
-                    <Search className="h-4 md:h-10 w-4 md:w-10" />
+                    <Search className="h-4 md:h-10 w-4 md:w-10"/>
                 </Button>
             </div>
-            {!isSuccess ? (
-                <Loader />
+            { !isSuccess ? (
+                <Loader/>
             ) : (
-                <WeatherInfo iconCode={data.data.weather[0].icon} city={data.data.name} temp={data.data.main.temp} />
-            )}
-            <Status />
-            <GroupTaskList />
+                <WeatherInfo iconCode={ data.data?.weather[0].icon } city={ data.data.name }
+                             temp={ data.data.main.temp }/>
+            ) }
+            <Status/>
+            <div className="flex justify-end">
+                <CategoryFilter/>
+            </div>
+            <GroupTaskList/>
             <div className="pb-5 fixed container bottom-0">
                 <div className="flex justify-end pr-8">
                     <Link to="/group/new">
-                        <NewTaskButton />
+                        <NewTaskButton/>
                     </Link>
                 </div>
             </div>

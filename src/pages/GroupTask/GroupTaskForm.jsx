@@ -7,23 +7,7 @@ import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate, useParams} from "react-router-dom";
 import {submitGroupTaskRequest, updateGroupTaskRequest} from "@/actions/actions.js";
-
-const categories = [
-    "Design",
-    "Development",
-    "Coding",
-    "Meeting",
-    "UI/UX",
-    "Testing",
-    "QA",
-    "Deployment",
-    "Marketing",
-    "Sales",
-    "Finance",
-    "HR",
-    "Management",
-    "Others"
-];
+import {categories} from "@/components/ui/categories.js";
 
 const GroupTaskForm = () => {
     const { id } = useParams();
@@ -124,7 +108,7 @@ const GroupTaskForm = () => {
                     { categories.map((category, index) => (
                         <li
                             key={ index }
-                            className={ `p-2 rounded-lg ${ selectedOption === category ? "bg-zinc-100" : "bg-zinc-400" } shadow-custom` }
+                            className={ `p-2 rounded-lg ${ selectedOption === category ? "bg-zinc-100" : "bg-zinc-300" } shadow-custom` }
                             onClick={ () => handleChange(index) }
                         >
                             { category }
