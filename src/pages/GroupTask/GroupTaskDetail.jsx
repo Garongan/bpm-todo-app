@@ -41,7 +41,7 @@ const GroupTaskDetail = () => {
                 <p className="text-[120%] text-zinc-500">{data.description}</p>
                 <p className="text-[120%] p-2 bg-zinc-300 rounded-lg w-fit">{data.category}</p>
             </div>
-            <TodoList todos={data.todos} />
+            <TodoList groupId={data.id} todos={data.todos} />
             <div className="pb-5 fixed container bottom-0">
                 <div className="flex justify-end pr-8">
                     <Link to={`/task/new/${id}`}>

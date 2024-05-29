@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {useEffect, useState} from "react";
 import Loader from "@/components/ui/loader.jsx";
 
-const TodoList = ({ todos }) => {
+const TodoList = ({ groupId, todos }) => {
     const [ loading, setLoading ] = useState(true);
 
     useEffect(() => {
@@ -19,7 +19,7 @@ const TodoList = ({ todos }) => {
             {todos?.length > 0 ? (
                 todos?.map((item, index) => (
                     <div key={index}>
-                        <Todo title={item.title}/>
+                        <Todo groupId={groupId} todo={item}/>
                     </div>
                 ))
             ) : (
@@ -30,6 +30,7 @@ const TodoList = ({ todos }) => {
 };
 
 TodoList.propTypes = {
+    groupId: PropTypes.number,
     todos: PropTypes.array
 };
 

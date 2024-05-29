@@ -22,6 +22,7 @@ const NewTodo = () => {
             ...groupTask,
             todos: [...groupTask.todos, { id: generatedId, title: todo, status: false }],
         };
+        console.log(groupTask);
         dispatch(submitGroupTaskRequest(groupTask));
         setTimeout(() => {
             if (!loading) navigate(-1);
