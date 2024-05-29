@@ -57,7 +57,7 @@ function App() {
                         <p className="text-[110%]">Create task fo today</p>
                     </div>
                 </div>
-                <Button variant="outline" size="icon" className="bg-zinc-200/75 border-0 shadow-custom">
+                <Button variant="ghost" size="icon" className="bg-zinc-200/75 border-0 shadow-custom">
                     <Search className="h-4 md:h-10 w-4 md:w-10" />
                 </Button>
             </div>

@@ -33,7 +33,7 @@ const GroupTaskDetail = () => {
                     </Button>
                 </Link>
                 <div className="w-auto">
-                    <CustomSelect status={data.status} />
+                    <CustomSelect />
                 </div>
             </div>
             <div className="flex flex-col gap-4">

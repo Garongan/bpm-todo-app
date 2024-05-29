@@ -16,7 +16,7 @@ const GroupTaskList = () => {
                     <div key={index} className="flex flex-col gap-4">
                         <Link to={`/group/detail/${task.id}`}>
                             <GroupTask
-                                color="#60a5fa"
+                                status={task.status}
                                 title={task.title}
                                 description={task.description}
                                 category={task.category}

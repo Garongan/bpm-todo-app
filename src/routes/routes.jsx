@@ -5,7 +5,7 @@ import GroupTaskLayout from "@/pages/GroupTask/GroupTaskLayout";
 import GroupTaskForm from "@/pages/GroupTask/GroupTaskForm.jsx";
 import TodoLayout from "@/pages/Todo/TodoLayout.jsx";
 import {createBrowserRouter} from "react-router-dom";
-import NewTodo from "@/pages/Todo/NewTodos.jsx";
+import NewTodo from "@/pages/Todo/TodosForm.jsx";
 
 const Routes = createBrowserRouter([
     {

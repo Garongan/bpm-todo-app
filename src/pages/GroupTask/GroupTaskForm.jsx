@@ -94,7 +94,7 @@ const GroupTaskForm = () => {
     return (
         <div className={ `flex flex-col gap-10` }>
             <Button
-                variant="outline"
+                variant="ghost"
                 size="icon"
                 className="bg-zinc-100/75 border-0 shadow-custom"
                 onClick={ () => navigate(-1) }
