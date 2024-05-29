@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {updateGroupTaskRequest} from "@/actions/actions.js";
 import Loader from "@/components/ui/loader.jsx";
+import CustomTodoActions from "@/components/ui/custom-todo-actions.jsx";
 
 const Todo = ({ groupId, todo }) => {
     const [ updatedGroupTask, setUpdateGroupTask ] = useState({
@@ -16,6 +17,7 @@ const Todo = ({ groupId, todo }) => {
     });
     const { groupTasks, loading } = useSelector((state) => state.groupTask);
     const dispatch = useDispatch();
+    const [ customLoading, setCustomLoading ] = useState(false);
 
     const handleClick = () => {
         const updatedTodos = updatedGroupTask.todos.map(item => {
@@ -42,21 +44,24 @@ const Todo = ({ groupId, todo }) => {
             }
         });
         dispatch(updateGroupTaskRequest(payload));
+        setCustomLoading(true);
     };
 
     useEffect(() => {
         const response = groupTasks.find((item) => item.id === parseInt(groupId));
         setUpdateGroupTask(response);
-    }, [ groupTasks, groupId, todo ]);
+        if (!loading) setCustomLoading(false);
+    }, [ groupTasks, groupId, todo, loading ]);
 
     return (
-        <div className="shadow-custom p-6 rounded-lg border">
+        <div className="shadow-custom p-6 rounded-lg border flex justify-between">
             {
-                loading ? <Loader/> : <div className="flex gap-4 items-center">
+                customLoading ? <Loader/> : <div className="flex gap-4 items-center">
                     <Checkbox checked={ todo.status } onClick={ handleClick }/>
                     <p className="text-[150%]">{ todo.title }</p>
                 </div>
             }
+            <CustomTodoActions groupId={groupId} id={todo.id}/>
         </div>
     );
 };

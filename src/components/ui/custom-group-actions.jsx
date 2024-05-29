@@ -17,7 +17,7 @@ import {useDispatch, useSelector} from "react-redux";
 import Loader from "@/components/ui/loader.jsx";
 import {updateGroupTaskRequest} from "@/actions/actions.js";
 
-const CustomActions = ({ id }) => {
+const CustomGroupActions = ({ id }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { groupTasks, loading } = useSelector((state) => state.groupTask);
@@ -65,8 +65,8 @@ const CustomActions = ({ id }) => {
     );
 };
 
-CustomActions.propTypes = {
+CustomGroupActions.propTypes = {
     id: PropTypes.number
 };
 
-export default CustomActions;
+export default CustomGroupActions;

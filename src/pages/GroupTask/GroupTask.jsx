@@ -18,7 +18,7 @@ const GroupTask = ({ status, title, description, category, todos }) => {
 
     useEffect(() => {
         if (todos?.length > 0) {
-            setValue((todos.filter((todo) => todo.status === true).length / todos.length) * 100);
+            setValue(Math.floor((todos.filter((todo) => todo.status === true).length / todos.length) * 100));
         } else {
             setValue(0);
         }

@@ -78,13 +78,13 @@ const CustomSelect = () => {
             <DropdownMenuContent align={ "end" } className="p-4 mt-4">
                 <DropdownMenuLabel className="text-[120%]">Change Status</DropdownMenuLabel>
                 { options.map((option, index) => (
-                    <>
+                    <div key={index}>
                         <DropdownMenuSeparator/>
-                        <DropdownMenuItem key={ index } onClick={ () => handleChange(option.value) }
+                        <DropdownMenuItem onClick={ () => handleChange(option.value) }
                                           className={ `text-[120%]` }>
                             { option.label }
                         </DropdownMenuItem>
-                    </>
+                    </div>
                 )) }
             </DropdownMenuContent>
         </DropdownMenu>

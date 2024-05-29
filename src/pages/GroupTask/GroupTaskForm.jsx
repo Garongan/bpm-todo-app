@@ -54,7 +54,7 @@ const GroupTaskForm = () => {
                 title: groupTitle,
                 description: groupDescription,
                 category: selectedOption
-            }
+            };
 
             const payload = groupTasks.map(item => {
                 if (item.id === parseInt(id)) {
@@ -89,7 +89,7 @@ const GroupTaskForm = () => {
             setGroupDescription(response.description);
             setUpdateGroupTask(response);
         }
-    }, [id, groupTasks]);
+    }, [ id, groupTasks ]);
 
     return (
         <div className={ `flex flex-col gap-10` }>
@@ -101,7 +101,11 @@ const GroupTaskForm = () => {
             >
                 <ChevronLeft className="h-4 md:h-10 w-4 md:w-10"/>
             </Button>
-            <h2 className="flex gap-2 text-[150%] font-medium">Create New Group</h2>
+            <h2 className="flex gap-2 text-[150%] font-medium">
+                {
+                    id ? "Update Group" : "Create New Group"
+                }
+            </h2>
             <div className="flex flex-col gap-4">
                 <Input
                     type="text"

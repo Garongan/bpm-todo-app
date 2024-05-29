@@ -2,29 +2,31 @@ import Todo from "./Todo.jsx";
 import PropTypes from "prop-types";
 import {useEffect, useState} from "react";
 import Loader from "@/components/ui/loader.jsx";
+import {useSelector} from "react-redux";
 
-const TodoList = ({ groupId, todos }) => {
-    const [ loading, setLoading ] = useState(true);
+const TodoList = ({ groupId }) => {
+    const [todos, setTodos] = useState([]);
+    const { groupTasks, loading } = useSelector((state) => state.groupTask);
 
     useEffect(() => {
-        setTimeout(() => {
-            setLoading(false);
-        }, 1000);
-    }, [ todos.length ]);
+        const response = groupTasks.find(item => item.id === groupId)
+        const data = response?.todos
+        setTodos(data)
+    }, [groupId, groupTasks]);
 
     if (loading) return <Loader/>;
 
     return (
         <div className="flex flex-col gap-4">
-            {todos?.length > 0 ? (
+            { todos?.length > 0 ? (
                 todos?.map((item, index) => (
-                    <div key={index}>
-                        <Todo groupId={groupId} todo={item}/>
+                    <div key={ index }>
+                        <Todo groupId={ groupId } todo={ item }/>
                     </div>
                 ))
             ) : (
                 <p>No todos available</p>
-            )}
+            ) }
         </div>
     );
 };

@@ -5,45 +5,53 @@ import GroupTaskLayout from "@/pages/GroupTask/GroupTaskLayout";
 import GroupTaskForm from "@/pages/GroupTask/GroupTaskForm.jsx";
 import TodoLayout from "@/pages/Todo/TodoLayout.jsx";
 import {createBrowserRouter} from "react-router-dom";
-import NewTodo from "@/pages/Todo/TodosForm.jsx";
+import TodosForm from "@/pages/Todo/TodosForm.jsx";
 
 const Routes = createBrowserRouter([
     {
         path: "*",
         element: <Error/>,
+        errorElement: <Error/>
     },
     {
         path: "/",
         element: <App/>,
+        errorElement: <Error/>
     },
     {
-        path: "task",
+        path: "todo",
         element: <TodoLayout/>,
+        errorElement: <Error/>,
         children: [
             {
                 path: "new/:groupId",
-                element: <NewTodo/>,
+                element: <TodosForm/>
             },
-        ],
+            {
+                path: "update/:groupId/:id",
+                element: <TodosForm/>
+            }
+        ]
     },
     {
         path: "group",
         element: <GroupTaskLayout/>,
+        errorElement: <Error/>,
         children: [
             {
                 path: "detail/:id",
-                element: <GroupTaskDetail/>,
+                element: <GroupTaskDetail/>
             },
             {
                 path: "new",
-                element: <GroupTaskForm/>,
+                element: <GroupTaskForm/>
             },
             {
                 path: "update/:id",
                 element: <GroupTaskForm/>
             }
-        ],
-    },
+        ]
+    }
 ]);
 
 export default Routes;
