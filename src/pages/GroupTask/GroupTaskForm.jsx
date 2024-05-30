@@ -78,9 +78,9 @@ const GroupTaskForm = () => {
     return (
         <div className={ `flex flex-col gap-10` }>
             <Button
-                variant="ghost"
+                variant="outline"
                 size="icon"
-                className="bg-zinc-100/75 border-0 shadow-custom"
+                className="bg-zinc-200/75 border-0 shadow-custom"
                 onClick={ () => navigate(-1) }
             >
                 <ChevronLeft className="h-4 md:h-10 w-4 md:w-10"/>

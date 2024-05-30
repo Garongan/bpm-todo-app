@@ -4,15 +4,19 @@ import {useEffect, useState} from "react";
 import Loader from "@/components/ui/loader.jsx";
 import {useSelector} from "react-redux";
 
-const TodoList = ({ groupId }) => {
-    const [todos, setTodos] = useState([]);
+const TodoList = ({ search, groupId }) => {
+    const [ todos, setTodos ] = useState([]);
     const { groupTasks, loading } = useSelector((state) => state.groupTask);
 
     useEffect(() => {
-        const response = groupTasks.find(item => item.id === groupId)
-        const data = response?.todos
-        setTodos(data)
-    }, [groupId, groupTasks]);
+        const response = groupTasks.find(item => item.id === groupId);
+        const data = response?.todos;
+        if (search) {
+            setTodos(data.filter(item => item.title === search));
+        } else {
+            setTodos(data);
+        }
+    }, [ groupId, groupTasks, search ]);
 
     if (loading) return <Loader/>;
 
@@ -33,7 +37,7 @@ const TodoList = ({ groupId }) => {
 
 TodoList.propTypes = {
     groupId: PropTypes.number,
-    todos: PropTypes.array
+    search: PropTypes.string
 };
 
 export default TodoList;
