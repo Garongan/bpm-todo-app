@@ -19,6 +19,7 @@ function App() {
     const { toast } = useToast();
     const [ searchChange, setSearchChange ] = useState("");
     const [ search, setSearch ] = useState("");
+    const [ filter, setFilter ] = useState("");
 
     const { data, isSuccess } = useQuery({
         queryKey: [ "weather", lat, lon ],
@@ -76,9 +77,9 @@ function App() {
             ) }
             <Status/>
             <div className="flex justify-end">
-                <CategoryFilter/>
+                <CategoryFilter value={filter} setValue={setFilter}/>
             </div>
-            <GroupTaskList search={ search }/>
+            <GroupTaskList search={ search } filter={filter}/>
             <div className="pb-5 fixed container bottom-0">
                 <div className="flex justify-end pr-8">
                     <Link to="/group/new">

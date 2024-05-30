@@ -6,17 +6,28 @@ import CustomGroupActions from "@/components/ui/custom-group-actions.jsx";
 import PropTypes from "prop-types";
 import {useEffect, useState} from "react";
 
-const GroupTaskList = ({ search }) => {
+const GroupTaskList = ({ filter, search }) => {
     const { groupTasks, loading } = useSelector((state) => state.groupTask);
     const [ data, setData ] = useState([]);
 
     useEffect(() => {
         if (search) {
-            setData(groupTasks.filter(item => item.title.toLowerCase() === search.toLowerCase()));
+            setData(groupTasks.filter(item => {
+                const isFind = item.title.toLowerCase() === search.toLowerCase();
+                if (filter && filter !== "All") {
+                    return isFind && item.category === filter;
+                } else {
+                    return isFind;
+                }
+            }));
         } else {
-            setData(groupTasks)
+            if (filter && filter !== "All") {
+                setData(groupTasks.filter(item => item.category === filter));
+            } else {
+                setData(groupTasks);
+            }
         }
-    }, [groupTasks, search]);
+    }, [ filter, groupTasks, search ]);
 
     if (loading) return <Loader/>;
 
@@ -46,6 +57,7 @@ const GroupTaskList = ({ search }) => {
 };
 
 GroupTaskList.propTypes = {
+    filter: PropTypes.string,
     search: PropTypes.string
 };
 

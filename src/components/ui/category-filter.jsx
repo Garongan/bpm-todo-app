@@ -5,10 +5,10 @@ import {Check, ChevronsUpDown} from "lucide-react";
 import {Command, CommandEmpty, CommandInput, CommandItem, CommandList} from "@/components/ui/command.jsx";
 import {cn} from "@/lib/utils.js";
 import {categories} from "@/components/shared/categories.js";
+import PropTypes from "prop-types";
 
-const CategoryFilter = () => {
+const CategoryFilter = ({value, setValue}) => {
     const [ open, setOpen ] = useState(false);
-    const [ value, setValue ] = useState("");
 
     return (
         <Popover open={ open } onOpenChange={ setOpen }>
@@ -42,7 +42,7 @@ const CategoryFilter = () => {
                                 <Check
                                     className={ cn(
                                         "mr-2 h-4 w-4",
-                                        value === item.value ? "opacity-100" : "opacity-0"
+                                        value === item ? "opacity-100" : "opacity-0"
                                     ) }
                                 />
                                 { item }
@@ -54,5 +54,10 @@ const CategoryFilter = () => {
         </Popover>
     );
 };
+
+CategoryFilter.propTypes = {
+    value: PropTypes.string,
+    setValue: PropTypes.func
+}
 
 export default CategoryFilter;
