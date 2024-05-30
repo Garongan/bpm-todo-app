@@ -13,11 +13,34 @@ import WeatherInfo from "../components/ui/weather-info";
 import GroupTaskList from "@/pages/GroupTask/GroupTaskList";
 import NewTaskButton from "../components/ui/new-task-button";
 import CategoryFilter from "@/components/ui/category-filter.jsx";
+import {
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger
+} from "@/components/ui/dialog.jsx";
+import {Input} from "@/components/ui/input.jsx";
 
 function App() {
-    const [ lat, setLat ] = useState("");
-    const [ lon, setLon ] = useState("");
+    const [ lat, setLat ] = useState(0);
+    const [ lon, setLon ] = useState(0);
     const { toast } = useToast();
+    const [ searchChange, setSearchChange ] = useState("");
+    const [ search, setSearch ] = useState("");
+
+    const { data, isSuccess } = useQuery({
+        queryKey: [ "weather", lat, lon ],
+        queryFn: () => CurrentWeatherByGeo(lat, lon),
+        enabled: !!lat && !!lon,
+        staleTime: keepPreviousData
+    });
+
+    const handleSearch = () => {
+        setSearch(searchChange);
+    };
 
     useEffect(() => {
         navigator.geolocation.getCurrentPosition(
@@ -38,13 +61,6 @@ function App() {
         );
     }, [ toast ]);
 
-    const { data, isSuccess } = useQuery({
-        queryKey: [ "weather", lat, lon ],
-        queryFn: () => CurrentWeatherByGeo(lat, lon),
-        enabled: !!lat && !!lon,
-        staleTime: keepPreviousData
-    });
-
     return (
         <div className="flex flex-col gap-10">
             <div className="flex justify-between">
@@ -58,9 +74,40 @@ function App() {
                         <p className="text-[110%]">Create task fo today</p>
                     </div>
                 </div>
-                <Button variant="ghost" size="icon" className="bg-zinc-200/75 border-0 shadow-custom">
-                    <Search className="h-4 md:h-10 w-4 md:w-10"/>
-                </Button>
+
+                <Dialog>
+                    <Button variant="ghost" size="icon" className="bg-zinc-200/75 border-0 shadow-custom" asChild>
+                        <DialogTrigger>
+                            <Search className="h-4 md:h-10 w-4 md:w-10"/>
+                        </DialogTrigger>
+                    </Button>
+                    <DialogContent className="max-w-sm sm:max-w-md rounded-xl">
+                        <form onSubmit={ event => {
+                            event.preventDefault();
+                            handleSearch();
+                        } }>
+                            <DialogHeader>
+                                <DialogTitle className="text-[110%] md:text-[150%]">Search Group Task</DialogTitle>
+                            </DialogHeader>
+                            <div className="flex items-center space-x-2">
+                                <div className="grid flex-1 gap-2">
+                                    <Input type="text" placeholder="Task..."
+                                           className="border-2 shadow-custom text-[100%] md:text-[120%] p-6 my-4"
+                                           onChange={ (e) => setSearchChange(e.target.value) } value={ searchChange }/>
+                                </div>
+                            </div>
+                            <DialogFooter className="sm:justify-start">
+                                <DialogClose asChild>
+                                    <Button type="submit" className="w-full border-2 text-[100%] md:text-[120%] p-6 shadow-custom">
+                                        Search
+                                    </Button>
+                                </DialogClose>
+                            </DialogFooter>
+                        </form>
+                    </DialogContent>
+                </Dialog>
+
+
             </div>
             { !isSuccess ? (
                 <Loader/>
@@ -72,7 +119,7 @@ function App() {
             <div className="flex justify-end">
                 <CategoryFilter/>
             </div>
-            <GroupTaskList/>
+            <GroupTaskList search={ search }/>
             <div className="pb-5 fixed container bottom-0">
                 <div className="flex justify-end pr-8">
                     <Link to="/group/new">

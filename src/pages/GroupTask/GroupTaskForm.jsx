@@ -7,7 +7,7 @@ import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate, useParams} from "react-router-dom";
 import {submitGroupTaskRequest, updateGroupTaskRequest} from "@/actions/actions.js";
-import {categories} from "@/components/ui/categories.js";
+import {categories} from "@/components/shared/categories.js";
 
 const GroupTaskForm = () => {
     const { id } = useParams();
@@ -105,7 +105,7 @@ const GroupTaskForm = () => {
                     onChange={ (e) => setGroupDescription(e.target.value) }
                 />
                 <ul className="grid grid-cols-3 gap-2">
-                    { categories.map((category, index) => (
+                    { categories.map((category, index) => category !== "All" && (
                         <li
                             key={ index }
                             className={ `p-2 rounded-lg ${ selectedOption === category ? "bg-zinc-100" : "bg-zinc-300" } shadow-custom` }
