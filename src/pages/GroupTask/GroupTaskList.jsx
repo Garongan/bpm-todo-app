@@ -6,28 +6,42 @@ import CustomGroupActions from "@/components/ui/custom-group-actions.jsx";
 import PropTypes from "prop-types";
 import {useEffect, useState} from "react";
 
-const GroupTaskList = ({ filter, search }) => {
+const GroupTaskList = ({ status, filter, search }) => {
     const { groupTasks, loading } = useSelector((state) => state.groupTask);
     const [ data, setData ] = useState([]);
 
     useEffect(() => {
         if (search) {
             setData(groupTasks.filter(item => {
-                const isFind = item.title.toLowerCase() === search.toLowerCase();
+                const isFindTitle = item.title.toLowerCase() === search.toLowerCase();
+                const isFindCategory = item.category === filter;
+                const isFindStatus = item.status === status;
                 if (filter && filter !== "All") {
-                    return isFind && item.category === filter;
+                    return isFindTitle && isFindCategory;
+                } else if (status) {
+                    return isFindTitle && isFindCategory && isFindStatus;
                 } else {
-                    return isFind;
+                    return isFindTitle;
                 }
             }));
         } else {
             if (filter && filter !== "All") {
-                setData(groupTasks.filter(item => item.category === filter));
+                setData(groupTasks.filter(item => {
+                    const isFindCategory = item.category === filter;
+                    const isFindStatus = item.status === status;
+                    if (status) {
+                        return isFindCategory && isFindStatus;
+                    } else {
+                        return isFindCategory;
+                    }
+                }));
+            } else if (status) {
+                setData(groupTasks.filter(item => item.status === status));
             } else {
                 setData(groupTasks);
             }
         }
-    }, [ filter, groupTasks, search ]);
+    }, [filter, groupTasks, search, status]);
 
     if (loading) return <Loader/>;
 
@@ -58,7 +72,8 @@ const GroupTaskList = ({ filter, search }) => {
 
 GroupTaskList.propTypes = {
     filter: PropTypes.string,
-    search: PropTypes.string
+    search: PropTypes.string,
+    status: PropTypes.string
 };
 
 export default GroupTaskList;

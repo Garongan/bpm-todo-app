@@ -76,12 +76,12 @@ const CustomSelect = () => {
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align={ "end" } className="p-4 mt-4">
-                <DropdownMenuLabel className="text-[120%]">Change Status</DropdownMenuLabel>
+                <DropdownMenuLabel className="text-[100%] md:text-[120%]">Change Status</DropdownMenuLabel>
                 { options.map((option, index) => (
                     <div key={index}>
                         <DropdownMenuSeparator/>
                         <DropdownMenuItem onClick={ () => handleChange(option.value) }
-                                          className={ `text-[120%]` }>
+                                          className="md:text-[120%]">
                             { option.label }
                         </DropdownMenuItem>
                     </div>

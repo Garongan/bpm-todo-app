@@ -20,6 +20,7 @@ function App() {
     const [ searchChange, setSearchChange ] = useState("");
     const [ search, setSearch ] = useState("");
     const [ filter, setFilter ] = useState("");
+    const [ status, setStatus ] = useState("");
 
     const { data, isSuccess } = useQuery({
         queryKey: [ "weather", lat, lon ],
@@ -59,8 +60,8 @@ function App() {
                         <AvatarImage src="https://github.com/shadcn.png"/>
                         <AvatarFallback>CN</AvatarFallback>
                     </Avatar>
-                    <div className="flex flex-col justify-center">
-                        <h2 className="flex gap-2 text-[150%] font-medium">Hi, Alvindo</h2>
+                    <div className="flex flex-col justify-center gap-2">
+                        <h2 className="flex gap-2 text-[150%] font-medium">Hi, Alvindo 🖐</h2>
                         <p className="text-[110%]">Create task fo today</p>
                     </div>
                 </div>
@@ -75,11 +76,11 @@ function App() {
                 <WeatherInfo iconCode={ data.data?.weather[0].icon } city={ data.data.name }
                              temp={ data.data.main.temp }/>
             ) }
-            <Status/>
+            <Status status={status} setStatus={setStatus}/>
             <div className="flex justify-end">
-                <CategoryFilter value={filter} setValue={setFilter}/>
+                <CategoryFilter value={ filter } setValue={ setFilter }/>
             </div>
-            <GroupTaskList search={ search } filter={filter}/>
+            <GroupTaskList search={ search } filter={ filter } status={status}/>
             <div className="pb-5 fixed container bottom-0">
                 <div className="flex justify-end pr-8">
                     <Link to="/group/new">
